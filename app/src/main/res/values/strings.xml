@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">POS DEEP LINK</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_title">Stone Created</string>
+    <string name="nav_header_subtitle">posandroid@stone.com.br</string>
+    <string name="nav_header_desc">Navigation header</string>
+</resources>
