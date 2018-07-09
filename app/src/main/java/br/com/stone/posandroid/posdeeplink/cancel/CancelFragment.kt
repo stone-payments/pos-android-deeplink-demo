@@ -16,7 +16,7 @@ class CancelFragment: Fragment() {
         private const val ATK_FIELD = "ATK"
         private const val AMOUNT_FIELD = "Amount"
         private const val RETURN_SCHEME_FIELD = "ReturnScheme"
-        private const val RETURN_SCHEME_VALUE = "CancelAppLink"
+        private const val RETURN_SCHEME_VALUE = "cancelapplink"
 
     }
 
@@ -54,7 +54,6 @@ class CancelFragment: Fragment() {
 
             intent.data = uriBuilder.build()
             startActivity(intent)
-
         }
     }
 }

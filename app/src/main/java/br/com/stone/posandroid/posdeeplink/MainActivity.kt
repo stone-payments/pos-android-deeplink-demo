@@ -2,19 +2,19 @@ package br.com.stone.posandroid.posdeeplink
 
 import android.os.Bundle
 import android.support.annotation.IdRes
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import br.com.stone.posandroid.posdeeplink.cancel.CancelFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var currentFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setFragment(fragment: Fragment){
+        currentFragment = fragment
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .commit()

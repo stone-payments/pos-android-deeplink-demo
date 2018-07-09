@@ -53,7 +53,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
-        android:text="ATK"
+        android:text="28681647496241"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchAmount" />
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Amount"
+        android:text="11111"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAtk" />
