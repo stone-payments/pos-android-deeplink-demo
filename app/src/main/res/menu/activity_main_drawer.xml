@@ -12,6 +12,10 @@
             android:id="@+id/nav_payment"
             android:icon="@drawable/ic_payment"
             android:title="Payment APP" />
+        <item
+            android:id="@+id/nav_activation"
+            android:icon="@drawable/ic_activation"
+            android:title="Activation APP" />
     </group>
 
 </menu>

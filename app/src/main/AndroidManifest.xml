@@ -37,6 +37,10 @@
                 <data
                     android:host="cancel"
                     android:scheme="cancelapplink" />
+
+                <data
+                    android:host="activation"
+                    android:scheme="activationapplink" />
             </intent-filter>
         </activity>
     </application>

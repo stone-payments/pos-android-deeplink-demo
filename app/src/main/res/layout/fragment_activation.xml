@@ -19,33 +19,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
-        android:id="@+id/switchAtk"
+        android:id="@+id/switchStoneCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:checked="true"
-        android:text="Send ATK"
+        android:text="Send Stone Code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchReturnScheme" />
 
-    <Switch
-        android:id="@+id/switchAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:checked="true"
-        android:text="Send Amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchAtk" />
-
     <EditText
-        android:id="@+id/editTextAtk"
+        android:id="@+id/editTextStoneCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -53,21 +40,10 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
-        android:text="29881708354594"
+        android:text="111"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchAmount" />
-
-    <EditText
-        android:id="@+id/editTextAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="11111"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAtk" />
+        app:layout_constraintTop_toBottomOf="@+id/switchStoneCode" />
 
     <Button
         android:id="@+id/buttonStartDeepLink"
@@ -79,7 +55,7 @@
         android:text="Start Deep link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAmount" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextStoneCode" />
 
 
 </android.support.constraint.ConstraintLayout>

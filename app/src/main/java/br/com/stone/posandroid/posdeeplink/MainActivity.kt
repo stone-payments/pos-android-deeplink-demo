@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import br.com.stone.posandroid.posdeeplink.activation.ActivationFragment
 import br.com.stone.posandroid.posdeeplink.cancel.CancelFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_payment -> {
 
+            }
+            R.id.nav_activation -> {
+                setFragment(ActivationFragment())
             }
         }
     }
