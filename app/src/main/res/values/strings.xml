@@ -6,4 +6,15 @@
     <string name="nav_header_title">Stone Created</string>
     <string name="nav_header_subtitle">posandroid@stone.com.br</string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string-array name="installment_type_list">
+        <item>À vista</item>
+        <item>Parcelado com juros</item>
+        <item>Parcelado sem juros</item>
+    </string-array>
+    <string-array name="payment_type_list">
+        <item>Débito</item>
+        <item>Crédito</item>
+        <item>Voucher</item>
+    </string-array>
 </resources>

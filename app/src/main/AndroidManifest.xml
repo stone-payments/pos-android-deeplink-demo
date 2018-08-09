@@ -41,6 +41,10 @@
                 <data
                     android:host="activation"
                     android:scheme="activationapplink" />
+
+                <data
+                    android:host="pay-response"
+                    android:scheme="payment-integrator" />
             </intent-filter>
         </activity>
     </application>

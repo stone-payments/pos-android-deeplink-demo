@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import br.com.stone.posandroid.posdeeplink.activation.ActivationFragment
 import br.com.stone.posandroid.posdeeplink.cancel.CancelFragment
+import br.com.stone.posandroid.posdeeplink.payment.PaymentFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -47,14 +48,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    private fun selectFragment(@IdRes id: Int){
+    private fun selectFragment(@IdRes id: Int) {
         nav_view.setCheckedItem(id)
         when (id) {
             R.id.nav_cancel -> {
                 setFragment(CancelFragment())
             }
             R.id.nav_payment -> {
-
+                setFragment(PaymentFragment())
             }
             R.id.nav_activation -> {
                 setFragment(ActivationFragment())
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun setFragment(fragment: Fragment){
+    private fun setFragment(fragment: Fragment) {
         currentFragment = fragment
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
