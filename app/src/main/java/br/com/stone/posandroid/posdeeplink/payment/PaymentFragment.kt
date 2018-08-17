@@ -16,6 +16,7 @@ class PaymentFragment : Fragment() {
     companion object {
         private const val INSTALLMENT_TYPE_FIELD = "installmenttype"
         private const val AMOUNT_FIELD = "amount"
+        private const val ITK_FIELD = "itk"
         private const val RETURN_SCHEME_FIELD = "returnscheme"
         private const val INSTALLMENT_NUMBER_FIELD = "installmentnumber"
         private const val PAYMENT_TYPE_FIELD = "paymenttype"
@@ -42,13 +43,13 @@ class PaymentFragment : Fragment() {
         spinnerInstallmentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
                 when (position) {
-                    0 -> {
+                    1 -> {
                         selectedInstallmentType = 0
                     }
-                    1 -> {
+                    2 -> {
                         selectedInstallmentType = 1
                     }
-                    2 -> {
+                    3 -> {
                         selectedInstallmentType = 2
                     }
                 }
@@ -62,13 +63,13 @@ class PaymentFragment : Fragment() {
         spinnerPaymentType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
                 when (position) {
-                    0 -> {
+                    1 -> {
                         selectedPaymentType = 1
                     }
-                    1 -> {
+                    2 -> {
                         selectedPaymentType = 2
                     }
-                    2 -> {
+                    3 -> {
                         selectedPaymentType = 3
                     }
                 }
@@ -99,6 +100,10 @@ class PaymentFragment : Fragment() {
             editTextInstallmentNumber.visibility = if (checked) View.VISIBLE else View.GONE
         }
 
+        switchItk.setOnCheckedChangeListener { _, checked ->
+            editTextItk.visibility = if (checked) View.VISIBLE else View.GONE
+        }
+
         buttonStartDeepLink.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             val uriBuilder = Uri.parse("payment-app://pay")
@@ -121,6 +126,10 @@ class PaymentFragment : Fragment() {
 
             if (switchInstallmentNumber.isChecked) {
                 uriBuilder.appendQueryParameter(INSTALLMENT_NUMBER_FIELD, editTextInstallmentNumber.text.toString())
+            }
+
+            if (switchItk.isChecked) {
+                uriBuilder.appendQueryParameter(ITK_FIELD, editTextItk.text.toString())
             }
 
             intent.data = uriBuilder.build()

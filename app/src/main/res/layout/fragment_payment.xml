@@ -66,7 +66,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:checked="true"
-                android:text="Send ITK" />
+                android:text="Send Installment Number" />
 
             <Switch
                 android:id="@+id/switchAmount"
@@ -77,6 +77,16 @@
                 android:layout_marginTop="8dp"
                 android:checked="true"
                 android:text="Send Amount" />
+
+            <Switch
+                android:id="@+id/switchItk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:checked="true"
+                android:text="Send Itk" />
 
             <Spinner
                 android:id="@+id/spinnerInstallmentType"
@@ -127,12 +137,15 @@
                 android:hint="amount"
                 android:inputType="textPersonName" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
+            <EditText
+                android:id="@+id/editTextItk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="226dp" />
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:hint="itk"
+                android:inputType="textPersonName" />
+
 
         </LinearLayout>
     </ScrollView>
