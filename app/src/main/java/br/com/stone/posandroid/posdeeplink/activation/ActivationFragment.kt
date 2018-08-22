@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.fragment_activation.*
 class ActivationFragment: Fragment() {
 
     companion object {
-        private const val STONE_CODE_FILED = "StoneCode"
-        private const val RETURN_SCHEME_FIELD = "ReturnScheme"
+        private const val STONE_CODE_FILED = "stonecode"
+        private const val RETURN_SCHEME_FIELD = "returnscheme"
         private const val RETURN_SCHEME_VALUE = "activationapplink"
 
     }
