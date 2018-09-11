@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.fragment_cancel.*
 class CancelFragment: Fragment() {
 
     companion object {
-        private const val ATK_FIELD = "ATK"
-        private const val AMOUNT_FIELD = "Amount"
-        private const val RETURN_SCHEME_FIELD = "ReturnScheme"
+        private const val ATK_FIELD = "atk"
+        private const val AMOUNT_FIELD = "amount"
+        private const val RETURN_SCHEME_FIELD = "returnscheme"
         private const val RETURN_SCHEME_VALUE = "cancelapplink"
 
     }
