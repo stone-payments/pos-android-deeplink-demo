@@ -8,6 +8,7 @@
 *.aar
 *.ap_
 *.aab
+!PaymentDeepLink/Jars/*
 
 # Files for the ART/Dalvik VM
 *.dex
