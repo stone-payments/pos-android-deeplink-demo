@@ -1,72 +1,78 @@
 package br.com.stone.posandroid.posdeeplink
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.IdRes
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
-import br.com.stone.posandroid.posdeeplink.activation.ActivationFragment
-import br.com.stone.posandroid.posdeeplink.cancel.CancelFragment
-import br.com.stone.posandroid.posdeeplink.payment.PaymentFragment
+import android.util.Log
+import android.widget.Toast
+import br.com.stone.posandroid.paymentapp.deeplink.PaymentDeeplink
+import br.com.stone.posandroid.paymentapp.deeplink.exception.PaymentException
+import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
+import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
+import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    lateinit var currentFragment: Fragment
+class MainActivity : AppCompatActivity() {
+    private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+        try {
+            val response = paymentDeeplink.receiveDeeplinkResponse(intent)
+            if (response != null) Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
+            Log.i("Deeplink Response", response.toString())
+        } catch (e: PaymentException) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            Log.e("Deeplink Repsonse error", e.toString())
+        }
 
-        nav_view.setNavigationItemSelectedListener(this)
-        selectFragment(R.id.nav_cancel)
-    }
+        deepLink.setOnClickListener {
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+            var amount = if (editTextAmount.text.trim().isNotEmpty() && editTextAmount.text.trim().isNotBlank()) {
+                editTextAmount.text.toString().toLong()
+            } else -1L
+
+            var editableAmount = editableAmountCheckbox.isChecked
+
+            var transactionType: TransactionType? = when (spinnerTransactionType.selectedItemPosition) {
+                0 -> TransactionType.DEBIT
+                1 -> TransactionType.CREDIT
+                2 -> TransactionType.VOUCHER
+                3 -> TransactionType.INVALID
+                else -> null
+            }
+
+            var installmentType: InstallmentType? = when (spinnerInstallmentType.selectedItemPosition) {
+                0 -> InstallmentType.MERCHANT
+                1 -> InstallmentType.ISSUER
+                2 -> InstallmentType.NONE
+                3 -> InstallmentType.INVALID
+                else -> null
+            }
+
+            var installmentCount: Int? = if (editTextInstallmentCount.text.trim().isNotEmpty() && editTextInstallmentCount.text.trim().isNotBlank()) {
+                editTextInstallmentCount.text.toString().toInt()
+            } else null
+
+            var orderId: Int? = if (editTextOrderId.text.trim().isNotEmpty() && editTextOrderId.text.trim().isNotBlank()) {
+                editTextOrderId.text.toString().toInt()
+            } else null
+
+            var returnScheme: String? = if (editTextReturnScheme.text.trim().isNotEmpty() && editTextReturnScheme.text.trim().isNotBlank()) {
+                editTextReturnScheme.text.toString()
+            } else null
+
+            paymentDeeplink.sendDeepLink(PaymentInfo(
+                    amount = amount,
+                    editableAmount = editableAmount,
+                    transactionType = transactionType,
+                    installmentCount = installmentCount,
+                    installmentType = installmentType,
+                    orderId = orderId,
+                    returnScheme = returnScheme
+            ))
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-        selectFragment(item.itemId)
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    private fun selectFragment(@IdRes id: Int) {
-        nav_view.setCheckedItem(id)
-        when (id) {
-            R.id.nav_cancel -> {
-                setFragment(CancelFragment())
-            }
-            R.id.nav_payment -> {
-                setFragment(PaymentFragment())
-            }
-            R.id.nav_activation -> {
-                setFragment(ActivationFragment())
-            }
-        }
-    }
-
-    private fun setFragment(fragment: Fragment) {
-        currentFragment = fragment
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit()
-    }
 }

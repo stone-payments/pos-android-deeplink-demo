@@ -1,22 +1,26 @@
 <resources>
-    <string name="app_name">POS DEEP LINK</string>
+    <string name="app_name">Deeplink Test App</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="nav_header_title">Stone Created</string>
     <string name="nav_header_subtitle">posandroid@stone.com.br</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="return_scheme">deeplinktest</string>
 
     <string-array name="installment_type_list">
-        <item>Installment Type</item>
-        <item>À vista</item>
-        <item>Parcelado com juros</item>
         <item>Parcelado sem juros</item>
+        <item>Parcelado com juros</item>
+        <item>À vista</item>
+        <item>Inválido</item>
+        <item>Nenhum</item>
     </string-array>
     <string-array name="payment_type_list">
-        <item>Transaction Type</item>
         <item>Débito</item>
         <item>Crédito</item>
         <item>Voucher</item>
+        <item>Inválido</item>
+        <item>Nenhum</item>
     </string-array>
+
 </resources>
