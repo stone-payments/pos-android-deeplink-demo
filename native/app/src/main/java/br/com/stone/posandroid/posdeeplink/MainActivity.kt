@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 else -> null
             }
 
-            var installmentCount = editTextInstallmentCount.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString().toInt()
+            var installmentCount = editTextInstallmentCount.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString().toIntOrNull()
 
             var orderId: Int? = editTextOrderId.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank()}.toString().toIntOrNull()
 
