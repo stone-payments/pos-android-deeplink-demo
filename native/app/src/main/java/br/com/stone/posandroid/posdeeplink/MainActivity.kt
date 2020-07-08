@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
             var installmentCount = editTextInstallmentCount.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString().toIntOrNull()
 
-            var orderId: Int? = editTextOrderId.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank()}.toString().toIntOrNull()
+            var orderId: Long? = editTextOrderId.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank()}.toString().toLongOrNull()
 
             var returnScheme = editTextReturnScheme.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString()
 
