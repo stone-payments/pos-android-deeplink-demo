@@ -51,11 +51,11 @@ class MainActivity : AppCompatActivity() {
                 else -> null
             }
 
-            var installmentCount = editTextInstallmentCount.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString().toIntOrNull()
+            var installmentCount = editTextInstallmentCount.text.toString().toIntOrNull()
 
-            var orderId: Long? = editTextOrderId.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank()}.toString().toLongOrNull()
+            var orderId: Long? = editTextOrderId.text.toString().toLongOrNull()
 
-            var returnScheme = editTextReturnScheme.text.trim().takeIf { it.isNotEmpty() && it.isNotBlank() }.toString()
+            var returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }.toString()
 
             paymentDeeplink.sendDeepLink(PaymentInfo(
                     amount = amount,
