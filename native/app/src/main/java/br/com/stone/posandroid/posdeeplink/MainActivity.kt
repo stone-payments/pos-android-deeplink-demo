@@ -10,9 +10,12 @@ import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
 import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
 import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
     private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
+    val longSafeMaxValue = 18
+    var validOrderID = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,19 +56,32 @@ class MainActivity : AppCompatActivity() {
 
             var installmentCount = editTextInstallmentCount.text.toString().toIntOrNull()
 
-            var orderId: Long? = editTextOrderId.text.toString().toLongOrNull()
+            var orderId: Long? = -1L
+            try {
+                orderId = if(editTextOrderId.text.toString().isNotBlank()) {
+                    editTextOrderId.text.toString().toLong()
+                } else {
+                    null
+                }
+                validOrderID = true
+            }catch (e: NumberFormatException){
+                Toast.makeText(this, "Valor de order id acima do limite do tipo long", Toast.LENGTH_SHORT).show()
+                validOrderID = false
+            }
 
             var returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }?.toString()
 
-            paymentDeeplink.sendDeepLink(PaymentInfo(
-                    amount = amount,
-                    editableAmount = editableAmount,
-                    transactionType = transactionType,
-                    installmentCount = installmentCount,
-                    installmentType = installmentType,
-                    orderId = orderId,
-                    returnScheme = returnScheme
-            ))
+            if(validOrderID){
+                paymentDeeplink.sendDeepLink(PaymentInfo(
+                        amount = amount,
+                        editableAmount = editableAmount,
+                        transactionType = transactionType,
+                        installmentCount = installmentCount,
+                        installmentType = installmentType,
+                        orderId = orderId,
+                        returnScheme = returnScheme
+                ))
+            }
         }
     }
 
