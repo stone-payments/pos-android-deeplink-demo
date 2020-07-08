@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
             var orderId: Long? = editTextOrderId.text.toString().toLongOrNull()
 
-            var returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }.toString()
+            var returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }?.toString()
 
             paymentDeeplink.sendDeepLink(PaymentInfo(
                     amount = amount,
