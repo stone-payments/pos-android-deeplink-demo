@@ -39,13 +39,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<Null> _sendDeeplink() async {
     String _message = "";
     try {
-      int amount = 10;
+      int amount = 100;
       bool editableAmount = false;
-      int installmentCount = 1;
+      int installmentCount = 2;
       String transactionType = "CREDIT"; //DEBIT, CREDIT, VOUCHER
       String installmentType = "MERCHANT"; //MERCHANT, ISSUER, NONE
       int orderId;
-      String returnScheme = "flutterDeeplinkDemo";
+      String returnScheme = "flutterdeeplinkdemo";
 
       await platformMethodChannel.invokeMethod('sendDeeplink', {
         "amount": amount,
