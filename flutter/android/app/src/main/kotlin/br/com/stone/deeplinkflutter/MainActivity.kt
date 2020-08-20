@@ -1,5 +1,6 @@
 package br.com.stone.deeplinkflutter
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -22,18 +23,12 @@ class MainActivity : FlutterActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        try {
-            val response = paymentDeeplink.receiveDeeplinkResponse(intent)
-            if (response != null) Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
-            Log.i("Deeplink Response", response.toString())
-        } catch (e: PaymentException) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-            Log.e("Deeplink Response error", e.toString())
-        }
+        handleDeepLinkResponse(intent)
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
                 .setMethodCallHandler { call: MethodCall, result: MethodChannel.Result ->
                     if (call.method == "sendDeeplink") {
@@ -72,4 +67,21 @@ class MainActivity : FlutterActivity() {
         paymentDeeplink.sendDeepLink(paymentInfo)
     }
 
+    private fun handleDeepLinkResponse(intent: Intent) {
+        try {
+            val response = paymentDeeplink.receiveDeeplinkResponse(intent)
+            if (response != null) Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
+            Log.i("Deeplink Response", response.toString())
+        } catch (e: PaymentException) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            Log.e("Deeplink Response error", e.toString())
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (intent.action === Intent.ACTION_VIEW) {
+            handleDeepLinkResponse(intent)
+        }
+    }
 }
