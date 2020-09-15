@@ -1,14 +1,15 @@
 package br.com.stone.posandroid.posdeeplink
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import br.com.stone.posandroid.paymentapp.deeplink.PaymentDeeplink
 import br.com.stone.posandroid.paymentapp.deeplink.exception.PaymentException
-import br.com.stone.posandroid.paymentapp.deeplink.model.*
+import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
+import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
+import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
     private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
