@@ -1,16 +1,15 @@
 package br.com.stone.posandroid.posdeeplink
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import br.com.stone.posandroid.paymentapp.deeplink.PaymentDeeplink
 import br.com.stone.posandroid.paymentapp.deeplink.exception.PaymentException
 import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
 import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
 import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
     private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
@@ -23,9 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         try {
             val response = paymentDeeplink.receiveDeeplinkResponse(intent)
-            if (response != null) Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
-            Log.i("Deeplink Response", response.toString())
+            if (response != null) {
+                Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
+            Log.i("Deeplink Response", response.toString())}
         } catch (e: PaymentException) {
+
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
             Log.e("Deeplink Repsonse error", e.toString())
         }
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
                 0 -> TransactionType.DEBIT
                 1 -> TransactionType.CREDIT
                 2 -> TransactionType.VOUCHER
-                3 -> TransactionType.INVALID
+                3 -> TransactionType.INSTANT_PAYMENT
+                4 -> TransactionType.INVALID
                 else -> null
             }
 
@@ -58,20 +60,20 @@ class MainActivity : AppCompatActivity() {
 
             var orderId: Long? = -1L
             try {
-                orderId = if(editTextOrderId.text.toString().isNotBlank()) {
+                orderId = if (editTextOrderId.text.toString().isNotBlank()) {
                     editTextOrderId.text.toString().toLong()
                 } else {
                     null
                 }
                 validOrderID = true
-            }catch (e: NumberFormatException){
+            } catch (e: NumberFormatException) {
                 Toast.makeText(this, "Valor de order id acima do limite do tipo long", Toast.LENGTH_SHORT).show()
                 validOrderID = false
             }
 
             var returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }?.toString()
 
-            if(validOrderID){
+            if (validOrderID) {
                 paymentDeeplink.sendDeepLink(PaymentInfo(
                         amount = amount,
                         editableAmount = editableAmount,

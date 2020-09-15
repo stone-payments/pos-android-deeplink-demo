@@ -19,6 +19,7 @@
         <item>Débito</item>
         <item>Crédito</item>
         <item>Voucher</item>
+        <item>QR Code</item>
         <item>Inválido</item>
         <item>Nenhum</item>
     </string-array>
