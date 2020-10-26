@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
                 1 -> TransactionType.CREDIT
                 2 -> TransactionType.VOUCHER
                 3 -> TransactionType.INSTANT_PAYMENT
-                4 -> TransactionType.INVALID
+                4 -> TransactionType.PIX
+                5 -> TransactionType.INVALID
                 else -> null
             }
 
