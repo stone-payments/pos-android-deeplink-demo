@@ -3,6 +3,7 @@ package br.com.stone.posandroid.posdeeplink
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.stone.posandroid.paymentapp.deeplink.PaymentDeeplink
@@ -88,5 +89,10 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Deeplink Repsonse error", e.toString())
             }
         }
+    }
+
+    fun btnDeepLinkCancel(view: View) {
+        val intent = Intent(this, CancelActivity::class.java)
+        startActivity(intent)
     }
 }
