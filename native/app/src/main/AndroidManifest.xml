@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CancelActivity">
+        <activity
+            android:name=".CancelActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -17,8 +19,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="@string/scheme_return"
-                    android:scheme="cancel-response" />
+                    android:host="cancel"
+                    android:scheme="@string/scheme_return" />
             </intent-filter>
         </activity>
         <activity
