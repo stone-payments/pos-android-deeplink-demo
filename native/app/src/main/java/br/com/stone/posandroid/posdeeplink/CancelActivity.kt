@@ -19,7 +19,7 @@ class CancelActivity : AppCompatActivity() {
         val amount = findViewById<EditText>(R.id.editAmount).text.toString()
         val atk = findViewById<EditText>(R.id.editAtk).text.toString()
 
-        val deepLinkReturnScheme = "cancel-response://deeplinktest"
+        val deepLinkReturnScheme = "deeplinktest"
         val uriBuilder = Uri.Builder()
         uriBuilder.authority("cancel")
         uriBuilder.scheme("cancel-app")
