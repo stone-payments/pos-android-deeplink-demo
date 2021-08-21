@@ -10,19 +10,36 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:launchMode="singleTop"
-            android:name=".MainActivity">
+            android:name=".CancelActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="cancel"
+                    android:scheme="@string/scheme_return" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="pay-response"
-                    android:scheme="@string/return_scheme" />
+                    android:scheme="@string/scheme_return" />
             </intent-filter>
         </activity>
     </application>
