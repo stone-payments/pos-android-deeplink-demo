@@ -15,30 +15,52 @@
         android:onClick="btnCancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAtk" />
+        app:layout_constraintTop_toBottomOf="@+id/editAtk"
+        tools:ignore="HardcodedText,UsingOnClickInXml" />
 
     <EditText
         android:id="@+id/editAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="Value"
         android:ems="10"
-        android:inputType="number"
         android:hint="Amount"
+        android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/editAtk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="number"
         android:hint="Atk"
-        android:layout_marginTop="16dp"
+        android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAmount" />
+        app:layout_constraintTop_toBottomOf="@+id/isEditableAmount"
+        tools:ignore="HardcodedText"
+        android:autofillHints="" />
+
+    <Switch
+        android:id="@+id/isEditableAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:checked="true"
+        android:minHeight="48dp"
+        android:text="Is Editable Amount?"
+        app:layout_constraintBottom_toTopOf="@+id/editAtk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAmount"
+        tools:ignore="HardcodedText,UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
 
 class CancelActivity : AppCompatActivity() {
@@ -16,16 +17,25 @@ class CancelActivity : AppCompatActivity() {
     }
 
     fun btnCancel(view: View) {
+        val deepLinkReturnScheme = "deeplinktest"
         val amount = findViewById<EditText>(R.id.editAmount).text.toString()
         val atk = findViewById<EditText>(R.id.editAtk).text.toString()
+        val isEditableAmount = findViewById<Switch>(R.id.isEditableAmount).isChecked
 
-        val deepLinkReturnScheme = "deeplinktest"
         val uriBuilder = Uri.Builder()
         uriBuilder.authority("cancel")
         uriBuilder.scheme("cancel-app")
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_RETURN_SCHEME, deepLinkReturnScheme)
-        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_ATK, atk)
-        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, amount)
+
+        if (atk.isBlank().not()) {
+            uriBuilder.appendQueryParameter(BUNDLE_EXTRA_ATK, atk)
+        }
+
+        if (amount.isBlank().not()) {
+            uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, amount)
+        }
+
+        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, isEditableAmount.toString())
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -43,5 +53,6 @@ class CancelActivity : AppCompatActivity() {
         const val BUNDLE_EXTRA_RETURN_SCHEME = "returnscheme"
         const val BUNDLE_EXTRA_ATK = "atk"
         const val BUNDLE_EXTRA_AMOUNT = "amount"
+        const val BUNDLE_EXTRA_EDITABLE_AMOUNT = "editable_amount"
     }
 }
