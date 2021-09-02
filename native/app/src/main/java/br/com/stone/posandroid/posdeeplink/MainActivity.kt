@@ -12,6 +12,7 @@ import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
 import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
 import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
@@ -76,18 +77,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        if (intent?.data != null && paymentDeeplink.receiveDeeplinkResponse(intent) != null) {
-            try {
+        try {
+            Log.i("onNewIntent", intent?.data.toString())
+            if (intent?.data != null && paymentDeeplink.receiveDeeplinkResponse(intent) != null) {
                 val response = paymentDeeplink.receiveDeeplinkResponse(intent)
                 if (response != null) {
                     Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
                     Log.i("Deeplink Response", response.toString())
                 }
-            } catch (e: PaymentException) {
-
-                Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-                Log.e("Deeplink Repsonse error", e.toString())
             }
+        } catch (e: PaymentException) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            Log.e("Deeplink Response error", e.toString())
+        } catch (e: Exception) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            Log.e("Deeplink error", e.toString())
         }
     }
 
