@@ -35,7 +35,7 @@ class CancelActivity : AppCompatActivity() {
             uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, amount)
         }
 
-        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, isEditableAmount.toString())
+        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_EDITABLE_AMOUNT, isEditableAmount.toString())
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -45,8 +45,16 @@ class CancelActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        Log.e("TESTE", intent?.data.toString())
-        Toast.makeText(this, "OK", Toast.LENGTH_LONG).show()
+        try {
+            Log.i("onNewIntent", intent?.data.toString())
+            if (intent?.data != null) {
+                Toast.makeText(this, intent.data.toString(), Toast.LENGTH_LONG).show()
+                Log.i("DeeplinkCancel Response", intent.data.toString())
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
+            Log.e("Deeplink error", e.toString())
+        }
     }
 
     companion object {
