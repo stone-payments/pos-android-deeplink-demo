@@ -99,4 +99,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, CancelActivity::class.java)
         startActivity(intent)
     }
+
+    fun btnCancel(view: View) {}
 }
