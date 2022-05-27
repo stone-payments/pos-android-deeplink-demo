@@ -96,5 +96,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun btnDeeplinkPrinter(view: View) {
+        val intent = Intent(this, PrinterActivity::class.java)
+        startActivity(intent)
+    }
+
     fun btnCancel(view: View) {}
 }
