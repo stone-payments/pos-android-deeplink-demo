@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.data = uriBuilder.build()
         startActivity(intent)
+
+        Log.v(TAG, "toUri(scheme = ${intent.data})")
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -99,5 +101,6 @@ class MainActivity : AppCompatActivity() {
         private const val INSTALLMENT_TYPE = "installment_type"
         private const val INSTALLMENT_COUNT = "installment_count"
         private const val RETURN_SCHEME = "return_scheme"
+        const val TAG = "SendDeeplinkPayment"
     }
 }
