@@ -1,21 +1,16 @@
 package br.com.stone.posandroid.posdeeplink
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import br.com.stone.posandroid.paymentapp.deeplink.PaymentDeeplink
-import br.com.stone.posandroid.paymentapp.deeplink.exception.PaymentException
-import br.com.stone.posandroid.paymentapp.deeplink.model.InstallmentType
-import br.com.stone.posandroid.paymentapp.deeplink.model.PaymentInfo
-import br.com.stone.posandroid.paymentapp.deeplink.model.TransactionType
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
-    private val paymentDeeplink by lazy { PaymentDeeplink(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,69 +21,65 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startPayment() {
-        val amount = if (editTextAmount.text.trim().isNotEmpty() && editTextAmount.text.trim().isNotBlank()) {
-            editTextAmount.text.toString().toLong()
-        } else -1L
+        val uriBuilder = Uri.Builder()
+        uriBuilder.authority("pay")
+        uriBuilder.scheme("payment-app")
+        uriBuilder.appendQueryParameter(RETURN_SCHEME, "deeplinktest")
 
-        val editableAmount = editableAmountCheckbox.isChecked
+        if (editTextAmount.text.toString().isNotBlank()) {
+            val amount = editTextAmount.text.toString()
+            uriBuilder.appendQueryParameter(AMOUNT, amount)
+        }
 
-        val transactionType: TransactionType? = when (spinnerTransactionType.selectedItemPosition) {
-            0 -> TransactionType.DEBIT
-            1 -> TransactionType.CREDIT
-            2 -> TransactionType.VOUCHER
-            3 -> TransactionType.INSTANT_PAYMENT
-            4 -> TransactionType.PIX
-            5 -> TransactionType.INVALID
+        val editableAmount = if (editableAmountCheckbox.isChecked) "1" else "0"
+        uriBuilder.appendQueryParameter(EDITABLE_AMOUNT, editableAmount)
+
+        val transactionType: String? = when (spinnerTransactionType.selectedItemPosition) {
+            0 -> "DEBIT"
+            1 -> "CREDIT"
+            2 -> "VOUCHER"
+            3 -> "INSTANT_PAYMENT"
+            4 -> "PIX"
             else -> null
         }
+        if (transactionType != null) {
+            uriBuilder.appendQueryParameter(TRANSACTION_TYPE, transactionType)
+        }
 
-        val installmentType: InstallmentType? = when (spinnerInstallmentType.selectedItemPosition) {
-            0 -> InstallmentType.MERCHANT
-            1 -> InstallmentType.ISSUER
-            2 -> InstallmentType.NONE
-            3 -> InstallmentType.INVALID
+        val installmentType: String? = when (spinnerInstallmentType.selectedItemPosition) {
+            0 -> "MERCHANT"
+            1 -> "ISSUER"
+            2 -> "NONE"
             else -> null
         }
-
-        val installmentCount = editTextInstallmentCount.text.toString().toIntOrNull()
-
-        var orderId: Long? = -1L
-        try {
-            orderId = if (editTextOrderId.text.toString().isNotBlank()) {
-                editTextOrderId.text.toString().toLong()
-            } else {
-                null
-            }
-        } catch (e: NumberFormatException) {
-            Toast.makeText(this, "Valor de order id acima do limite do tipo long", Toast.LENGTH_SHORT).show()
-            return
+        if (installmentType != null) {
+            uriBuilder.appendQueryParameter(INSTALLMENT_TYPE, installmentType)
         }
-        val returnScheme = editTextReturnScheme.text.takeIf { it.isNotBlank() }?.toString()
-            paymentDeeplink.sendDeepLink(PaymentInfo(
-                    amount = amount,
-                    editableAmount = editableAmount,
-                    transactionType = transactionType,
-                    installmentCount = installmentCount,
-                    installmentType = installmentType,
-                    orderId = orderId,
-                    returnScheme = returnScheme
-            ))
+
+        if (editTextInstallmentCount.text.toString().isNotBlank()) {
+            val installmentCount = editTextInstallmentCount.text.toString()
+            uriBuilder.appendQueryParameter(INSTALLMENT_COUNT, installmentCount)
+        }
+
+        if (editTextOrderId.text.toString().isNotBlank()) {
+            val orderId = editTextOrderId.text.toString()
+            uriBuilder.appendQueryParameter(ORDER_ID, orderId)
+        }
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.data = uriBuilder.build()
+        startActivity(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         try {
             Log.i("onNewIntent", intent?.data.toString())
-            if (intent?.data != null && paymentDeeplink.receiveDeeplinkResponse(intent) != null) {
-                val response = paymentDeeplink.receiveDeeplinkResponse(intent)
-                if (response != null) {
-                    Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
-                    Log.i("Deeplink Response", response.toString())
-                }
+            if (intent?.data != null) {
+                Toast.makeText(this, intent.data.toString(), Toast.LENGTH_LONG).show()
+                Log.i("DeeplinkPay Response", intent.data.toString())
             }
-        } catch (e: PaymentException) {
-            Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
-            Log.e("Deeplink Response error", e.toString())
         } catch (e: Exception) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_LONG).show()
             Log.e("Deeplink error", e.toString())
@@ -100,5 +91,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun btnCancel(view: View) {}
+    companion object {
+        private const val AMOUNT = "amount"
+        private const val ORDER_ID = "order_id"
+        private const val EDITABLE_AMOUNT = "editable_amount"
+        private const val TRANSACTION_TYPE = "transaction_type"
+        private const val INSTALLMENT_TYPE = "installment_type"
+        private const val INSTALLMENT_COUNT = "installment_count"
+        private const val RETURN_SCHEME = "return_scheme"
+    }
 }
