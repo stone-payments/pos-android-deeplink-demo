@@ -60,5 +60,4 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'br.com.stone:payment-deeplink:1.8.0-RC4'
 }
