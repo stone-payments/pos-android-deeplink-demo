@@ -60,6 +60,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
@@ -113,13 +114,6 @@
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7">
       <Version>1.2.71</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PaymentDeepLink\PaymentDeepLink.csproj">
-      <Project>{5b35e025-8b98-44da-ba93-f5f33c186a60}</Project>
-      <Name>PaymentDeepLink</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
