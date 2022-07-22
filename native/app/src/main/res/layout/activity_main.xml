@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <Button
         android:id="@+id/deepLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DeepLink"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="DeepLink Pagamento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextOrderId" />
@@ -20,39 +18,40 @@
         android:id="@+id/deepLinkCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DeepLink Cancel"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:onClick="btnDeepLinkCancel"
+        android:text="Ir para Cancelamento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deepLink"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
         android:text="Valor:"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/editTextAmount" />
 
     <EditText
         android:id="@+id/editTextAmount"
         android:layout_width="129dp"
         android:layout_height="43dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/textViewAmount"
-        app:layout_constraintTop_toTopOf="@+id/textViewAmount" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/editableAmountCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:text="Valor Editavel?"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
         app:layout_constraintStart_toEndOf="@+id/editTextAmount"
         app:layout_constraintTop_toTopOf="@+id/editTextAmount" />
 
@@ -60,6 +59,7 @@
         android:id="@+id/textViewTransactionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Tipo de pagamento:"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,18 +69,19 @@
         android:id="@+id/spinnerTransactionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:ems="10"
+        android:entries="@array/payment_type_list"
         android:hint="paymentType"
         android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTransactionType"
-        android:entries="@array/payment_type_list"/>
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTransactionType"
+        app:layout_constraintStart_toEndOf="@+id/textViewTransactionType"
+        app:layout_constraintTop_toTopOf="@+id/textViewTransactionType" />
 
     <TextView
         android:id="@+id/textViewInstallmentType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Tipo de Parcelamento:"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,17 +91,18 @@
         android:id="@+id/spinnerInstallmentType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:entries="@array/installment_type_list"
         android:hint="InstallmentType"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInstallmentType" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewInstallmentType"
+        app:layout_constraintStart_toEndOf="@+id/textViewInstallmentType"
+        app:layout_constraintTop_toTopOf="@+id/textViewInstallmentType" />
 
     <TextView
         android:id="@+id/textViewInstallmentCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Quantidade de parcelamento:"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,36 +114,19 @@
         android:layout_height="45dp"
         android:ems="10"
         android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewInstallmentCount"
         app:layout_constraintStart_toEndOf="@+id/textViewInstallmentCount"
         app:layout_constraintTop_toTopOf="@+id/textViewInstallmentCount" />
-
-    <TextView
-        android:id="@+id/textViewReturnScheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Schema de retorno:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextInstallmentCount" />
-
-    <EditText
-        android:id="@+id/editTextReturnScheme"
-        android:layout_width="150dp"
-        android:layout_height="41dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="deeplinktest"
-        app:layout_constraintStart_toEndOf="@+id/textViewReturnScheme"
-        app:layout_constraintTop_toTopOf="@+id/textViewReturnScheme" />
 
     <TextView
         android:id="@+id/textViewOrderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="ID do pedido:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextReturnScheme" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextInstallmentCount" />
 
     <EditText
         android:id="@+id/editTextOrderId"
@@ -149,6 +134,7 @@
         android:layout_height="51dp"
         android:ems="10"
         android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewOrderId"
         app:layout_constraintStart_toEndOf="@+id/textViewOrderId"
         app:layout_constraintTop_toTopOf="@+id/textViewOrderId" />
 
