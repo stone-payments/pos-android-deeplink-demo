@@ -18,12 +18,23 @@
         android:id="@+id/deepLinkCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
         android:onClick="btnDeepLinkCancel"
-        android:text="Ir para Cancelamento"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="DeepLink Cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deepLink" />
+
+    <Button
+        android:id="@+id/deeplinkPrinter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="btnDeeplinkPrinter"
+        android:text="DeepLink Printer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deepLinkCancel" />
 
     <TextView
         android:id="@+id/textViewAmount"
@@ -73,9 +84,8 @@
         android:entries="@array/payment_type_list"
         android:hint="paymentType"
         android:inputType="numberDecimal"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTransactionType"
-        app:layout_constraintStart_toEndOf="@+id/textViewTransactionType"
-        app:layout_constraintTop_toTopOf="@+id/textViewTransactionType" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTransactionType" />
 
     <TextView
         android:id="@+id/textViewInstallmentType"
