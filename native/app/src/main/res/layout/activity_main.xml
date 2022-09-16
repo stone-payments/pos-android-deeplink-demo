@@ -6,8 +6,9 @@
 
     <Button
         android:id="@+id/deepLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:text="DeepLink Pagamento"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,8 +17,9 @@
 
     <Button
         android:id="@+id/deepLinkCancel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:onClick="btnDeepLinkCancel"
         android:text="DeepLink Cancel"
@@ -27,14 +29,27 @@
 
     <Button
         android:id="@+id/deeplinkPrinter"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:onClick="btnDeeplinkPrinter"
         android:text="DeepLink Printer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deepLinkCancel" />
+
+    <Button
+        android:id="@+id/deeplinkReprinter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:onClick="btnDeeplinkReprinter"
+        android:text="DeepLink Reprinter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deeplinkPrinter" />
 
     <TextView
         android:id="@+id/textViewAmount"

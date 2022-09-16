@@ -15,6 +15,7 @@
         <item>Inválido</item>
         <item>Nenhum</item>
     </string-array>
+
     <string-array name="payment_type_list">
         <item>Débito</item>
         <item>Crédito</item>
@@ -23,6 +24,12 @@
         <item>PIX</item>
         <item>Inválido</item>
         <item>Nenhum</item>
+    </string-array>
+
+    <string-array name="customer_type_list">
+        <item>Lojista</item>
+        <item>Cliente</item>
+        <item>Nulo</item>
     </string-array>
 
 </resources>

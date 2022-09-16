@@ -97,4 +97,20 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, PrinterActivity::class.java)
         startActivity(intent)
     }
+
+    fun btnDeeplinkReprinter(view: View) {
+        val intent = Intent(this, ReprinterActivity::class.java)
+        startActivity(intent)
+    }
+
+    companion object {
+        private const val AMOUNT = "amount"
+        private const val ORDER_ID = "order_id"
+        private const val EDITABLE_AMOUNT = "editable_amount"
+        private const val TRANSACTION_TYPE = "transaction_type"
+        private const val INSTALLMENT_TYPE = "installment_type"
+        private const val INSTALLMENT_COUNT = "installment_count"
+        private const val RETURN_SCHEME = "return_scheme"
+        const val TAG = "SendDeeplinkPayment"
+    }
 }
