@@ -40,10 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
     String _message = "";
     try {
       int amount = 100;
-      bool editableAmount = false;
-      int installmentCount = 2;
-      String transactionType = "CREDIT"; //DEBIT, CREDIT, VOUCHER
-      String installmentType = "MERCHANT"; //MERCHANT, ISSUER, NONE
+      bool editableAmount = false; //true, false
+      int installmentCount; //número de 2 a 18
+      String transactionType = "DEBIT"; //DEBIT, CREDIT, VOUCHER
+      String installmentType; //MERCHANT, ISSUER, NONE
       int orderId;
       String returnScheme = "flutterdeeplinkdemo";
 

@@ -26,12 +26,12 @@ class MainActivity : FlutterActivity() {
             .setMethodCallHandler { call: MethodCall, result: MethodChannel.Result ->
                 if (call.method == "sendDeeplink") {
                     sendDeeplink(
-                        call.argument<Int>("amount")!!.toLong(),
+                        call.argument<Int>("amount"),
                         call.argument<Boolean>("editableAmount"),
-                        call.argument<String>("transactionType")!!,
+                        call.argument<String>("transactionType"),
                         call.argument<Int>("installmentCount"),
-                        call.argument<String>("installmentType")!!,
-                        call.argument<Long>("orderId"),
+                        call.argument<String>("installmentType"),
+                        call.argument<Int>("orderId"),
                         call.argument<String>("returnScheme")
                     )
                     result.success(true)
@@ -40,12 +40,12 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun sendDeeplink(
-        amount: Long,
+        amount: Int?,
         editableAmount: Boolean?,
-        transactionType: String,
+        transactionType: String?,
         installmentCount: Int?,
-        installmentType: String,
-        orderId: Long?,
+        installmentType: String?,
+        orderId: Int?,
         returnScheme: String?
     ) {
 
@@ -53,17 +53,26 @@ class MainActivity : FlutterActivity() {
         uriBuilder.authority("pay")
         uriBuilder.scheme("payment-app")
         uriBuilder.appendQueryParameter(RETURN_SCHEME, "flutterdeeplinkdemo")
-        uriBuilder.appendQueryParameter(AMOUNT, amount.toString())
         uriBuilder.appendQueryParameter(EDITABLE_AMOUNT, if (editableAmount == true) "1" else "0")
-        uriBuilder.appendQueryParameter(TRANSACTION_TYPE, transactionType)
-        uriBuilder.appendQueryParameter(INSTALLMENT_TYPE, installmentType)
+
+        if (amount != null) {
+            uriBuilder.appendQueryParameter(AMOUNT, amount.toLong().toString())
+        }
+
+        if (transactionType != null) {
+            uriBuilder.appendQueryParameter(TRANSACTION_TYPE, transactionType)
+        }
+
+        if (installmentType != null) {
+            uriBuilder.appendQueryParameter(INSTALLMENT_TYPE, installmentType)
+        }
 
         if (installmentCount != null) {
             uriBuilder.appendQueryParameter(INSTALLMENT_COUNT, installmentCount.toString())
         }
 
         if (orderId != null) {
-            uriBuilder.appendQueryParameter(ORDER_ID, orderId.toString())
+            uriBuilder.appendQueryParameter(ORDER_ID, orderId.toLong().toString())
         }
 
         val intent = Intent(Intent.ACTION_VIEW)
