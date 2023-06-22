@@ -7,17 +7,21 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import br.com.stone.posandroid.posdeeplink.databinding.ActivityMainBinding
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        deepLink.setOnClickListener {
-            startPayment()
-        }
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.deepLink.setOnClickListener { startPayment() }
+        binding.deeplinkCapture.setOnClickListener { startCapture() }
     }
 
     private fun startPayment() {
@@ -26,15 +30,15 @@ class MainActivity : AppCompatActivity() {
         uriBuilder.scheme("payment-app")
         uriBuilder.appendQueryParameter(RETURN_SCHEME, "deeplinktest")
 
-        if (editTextAmount.text.toString().isNotBlank()) {
-            val amount = editTextAmount.text.toString()
+        if (binding.editTextAmount.text.toString().isNotBlank()) {
+            val amount = binding.editTextAmount.text.toString()
             uriBuilder.appendQueryParameter(AMOUNT, amount)
         }
 
-        val editableAmount = if (editableAmountCheckbox.isChecked) "1" else "0"
+        val editableAmount = if (binding.editableAmountCheckbox.isChecked) "1" else "0"
         uriBuilder.appendQueryParameter(EDITABLE_AMOUNT, editableAmount)
 
-        val transactionType: String? = when (spinnerTransactionType.selectedItemPosition) {
+        val transactionType: String? = when (binding.spinnerTransactionType.selectedItemPosition) {
             0 -> "DEBIT"
             1 -> "CREDIT"
             2 -> "VOUCHER"
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             uriBuilder.appendQueryParameter(TRANSACTION_TYPE, transactionType)
         }
 
-        val installmentType: String? = when (spinnerInstallmentType.selectedItemPosition) {
+        val installmentType: String? = when (binding.spinnerInstallmentType.selectedItemPosition) {
             0 -> "MERCHANT"
             1 -> "ISSUER"
             2 -> "NONE"
@@ -56,13 +60,13 @@ class MainActivity : AppCompatActivity() {
             uriBuilder.appendQueryParameter(INSTALLMENT_TYPE, installmentType)
         }
 
-        if (editTextInstallmentCount.text.toString().isNotBlank()) {
-            val installmentCount = editTextInstallmentCount.text.toString()
+        if (binding.editTextInstallmentCount.text.toString().isNotBlank()) {
+            val installmentCount = binding.editTextInstallmentCount.text.toString()
             uriBuilder.appendQueryParameter(INSTALLMENT_COUNT, installmentCount)
         }
 
-        if (editTextOrderId.text.toString().isNotBlank()) {
-            val orderId = editTextOrderId.text.toString()
+        if (binding.editTextOrderId.text.toString().isNotBlank()) {
+            val orderId = binding.editTextOrderId.text.toString()
             uriBuilder.appendQueryParameter(ORDER_ID, orderId)
         }
 
@@ -72,6 +76,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
         Log.v(TAG, "toUri(scheme = ${intent.data})")
+    }
+
+    private fun startCapture() {
+        val intent = Intent(this, CaptureActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {

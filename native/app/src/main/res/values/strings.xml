@@ -7,6 +7,7 @@
     <string name="nav_header_subtitle">posandroid@stone.com.br</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="scheme_return">deeplinktest</string>
+    <string name="scheme_return_capture">deeplink_capture</string>
 
     <string-array name="installment_type_list">
         <item>Parcelado sem juros</item>
