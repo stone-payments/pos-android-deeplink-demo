@@ -32,7 +32,12 @@ class CaptureActivity : AppCompatActivity() {
 
         val amount = binding.editAmount.text.toString()
         val atk = binding.editAtk.text.toString()
-        val amountEditable = binding.isEditableAmount.isChecked
+        val amountEditable = if(binding.isEditableAmount.isChecked){
+            "1"
+        }else
+            "0"
+
+        val isPreAuthorization = binding.isPreAuthorization.isChecked
 
         val uriBuilder = Uri.Builder()
         uriBuilder.authority("capture")
@@ -50,7 +55,10 @@ class CaptureActivity : AppCompatActivity() {
 
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, amount)
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_ATK, atk)
-        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_EDITABLE_AMOUNT, amountEditable.toString())
+        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_EDITABLE_AMOUNT, amountEditable)
+        if(isPreAuthorization){
+            uriBuilder.appendQueryParameter(BUNDLE_EXTRA_MANUAL_CAPTURE, "1")
+        }
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -78,5 +86,6 @@ class CaptureActivity : AppCompatActivity() {
         const val BUNDLE_EXTRA_ATK = "atk"
         const val BUNDLE_EXTRA_AMOUNT = "amount"
         const val BUNDLE_EXTRA_EDITABLE_AMOUNT = "editable_amount"
+        const val BUNDLE_EXTRA_MANUAL_CAPTURE = "manual_capture"
     }
 }
