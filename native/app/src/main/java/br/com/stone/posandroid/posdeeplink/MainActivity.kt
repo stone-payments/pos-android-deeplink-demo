@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         uriBuilder.authority("pay")
         uriBuilder.scheme("payment-app")
         uriBuilder.appendQueryParameter(RETURN_SCHEME, "deeplinktest")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_THEME_ENABLED, "true")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_LOGO, "ic_activation")
 
         if (editTextAmount.text.toString().isNotBlank()) {
             val amount = editTextAmount.text.toString()
@@ -89,7 +91,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun btnDeepLinkCancel(view: View) {
-        val intent = Intent(this, CancelActivity::class.java)
+        val uriBuilder = Uri.Builder()
+        uriBuilder.authority("cancel")
+        uriBuilder.scheme("cancel-app")
+        uriBuilder.appendQueryParameter(RETURN_SCHEME, "deeplinktest")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_THEME_ENABLED, "true")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_LOGO, "ic_activation")
+
+        //val intent = Intent(this, CancelActivity::class.java)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.data = uriBuilder.build()
+
         startActivity(intent)
     }
 
@@ -111,6 +124,8 @@ class MainActivity : AppCompatActivity() {
         private const val INSTALLMENT_TYPE = "installment_type"
         private const val INSTALLMENT_COUNT = "installment_count"
         private const val RETURN_SCHEME = "return_scheme"
+        private const val THIRD_PARTY_THEME_ENABLED = "third_party_theme_enabled"
+        private const val THIRD_PARTY_LOGO = "third_party_logo"
         const val TAG = "SendDeeplinkPayment"
     }
 }
