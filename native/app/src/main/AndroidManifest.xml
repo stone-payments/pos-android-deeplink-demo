@@ -54,6 +54,23 @@
                     android:scheme="@string/scheme_return" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".CaptureActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="pay-response"
+                    android:scheme="@string/scheme_return_capture" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
