@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="content_brand">#ff8a00ff</color>
+    <color name="content_on_brand">#ffEBD4FF</color>
+
+    <color name="content_brand_dark">#ffEBD4FF</color>
+    <color name="content_on_brand_dark">#ff8a00ff</color>
+</resources>
