@@ -36,6 +36,7 @@ class CancelActivity : AppCompatActivity() {
         }
 
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_EDITABLE_AMOUNT, isEditableAmount.toString())
+        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_THIRD_PARTY_THEME_ENABLED, true.toString())
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -62,5 +63,6 @@ class CancelActivity : AppCompatActivity() {
         const val BUNDLE_EXTRA_ATK = "atk"
         const val BUNDLE_EXTRA_AMOUNT = "amount"
         const val BUNDLE_EXTRA_EDITABLE_AMOUNT = "editable_amount"
+        const val BUNDLE_EXTRA_THIRD_PARTY_THEME_ENABLED = "third_party_theme_enabled"
     }
 }
