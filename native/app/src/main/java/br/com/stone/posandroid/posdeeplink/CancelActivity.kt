@@ -11,6 +11,8 @@ import android.widget.Switch
 import android.widget.Toast
 
 class CancelActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cancel)
