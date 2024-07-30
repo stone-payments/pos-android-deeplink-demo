@@ -7,19 +7,24 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import br.com.stone.posandroid.posdeeplink.databinding.ActivityPrinterBinding
 
 class PrinterActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityPrinterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_printer)
+        binding = ActivityPrinterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val printAllWithScreenButton: Button = findViewById(R.id.printAllWithScreenButton)
-        val printTextWithScreenButton: Button = findViewById(R.id.printTextWithScreenButton)
-        val printImageWithScreenButton: Button = findViewById(R.id.printImageWithScreenButton)
+        val printAllWithScreenButton: Button = binding.printAllWithScreenButton
+        val printTextWithScreenButton: Button = binding.printTextWithScreenButton
+        val printImageWithScreenButton: Button = binding.printImageWithScreenButton
 
-        val printAllWithoutScreenButton: Button = findViewById(R.id.printAllWithoutScreenButton)
-        val printTextWithoutScreenButton: Button = findViewById(R.id.printTextWithoutScreenButton)
-        val printImageWithoutScreenButton: Button = findViewById(R.id.printImageWithoutScreenButton)
+        val printAllWithoutScreenButton: Button = binding.printAllWithoutScreenButton
+        val printTextWithoutScreenButton: Button = binding.printTextWithoutScreenButton
+        val printImageWithoutScreenButton: Button = binding.printImageWithoutScreenButton
 
         printAllWithScreenButton.setOnClickListener {
             print("true", fromResource(R.raw.printable_all))
