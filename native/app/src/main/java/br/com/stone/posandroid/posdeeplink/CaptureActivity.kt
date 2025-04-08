@@ -56,6 +56,9 @@ class CaptureActivity : AppCompatActivity() {
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_AMOUNT, amount)
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_ATK, atk)
         uriBuilder.appendQueryParameter(BUNDLE_EXTRA_EDITABLE_AMOUNT, amountEditable)
+        uriBuilder.appendQueryParameter(BUNDLE_EXTRA_TRANSACTION_TYPE, "DEBIT")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_THEME_ENABLED, "true")
+
         if(isPreAuthorization){
             uriBuilder.appendQueryParameter(BUNDLE_EXTRA_MANUAL_CAPTURE, "1")
         }
@@ -87,5 +90,7 @@ class CaptureActivity : AppCompatActivity() {
         const val BUNDLE_EXTRA_AMOUNT = "amount"
         const val BUNDLE_EXTRA_EDITABLE_AMOUNT = "editable_amount"
         const val BUNDLE_EXTRA_MANUAL_CAPTURE = "manual_capture"
+        const val BUNDLE_EXTRA_TRANSACTION_TYPE = "transaction_type"
+        private const val THIRD_PARTY_THEME_ENABLED = "third_party_theme_enabled"
     }
 }

@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         uriBuilder.authority("pay")
         uriBuilder.scheme("payment-app")
         uriBuilder.appendQueryParameter(RETURN_SCHEME, "deeplinktest")
+        uriBuilder.appendQueryParameter(THIRD_PARTY_THEME_ENABLED, "true")
 
         if (binding.editTextAmount.text.toString().isNotBlank()) {
             val amount = binding.editTextAmount.text.toString()
@@ -121,5 +122,6 @@ class MainActivity : AppCompatActivity() {
         private const val INSTALLMENT_COUNT = "installment_count"
         private const val RETURN_SCHEME = "return_scheme"
         const val TAG = "SendDeeplinkPayment"
+        private const val THIRD_PARTY_THEME_ENABLED = "third_party_theme_enabled"
     }
 }
