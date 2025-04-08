@@ -6,17 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_reprinter.customerTypeSpinner
-import kotlinx.android.synthetic.main.activity_reprinter.reprintAtkEditText
-import kotlinx.android.synthetic.main.activity_reprinter.reprintWithScreenButton
-import kotlinx.android.synthetic.main.activity_reprinter.showFeedbackScreenCheckbox
+import br.com.stone.posandroid.posdeeplink.databinding.ActivityReprinterBinding
 
 class ReprinterActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityReprinterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reprinter)
 
-        reprintWithScreenButton.setOnClickListener {
+        binding = ActivityReprinterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.reprintWithScreenButton.setOnClickListener {
             reprint()
         }
     }
@@ -31,14 +33,14 @@ class ReprinterActivity : AppCompatActivity() {
 
         uriBuilder.appendQueryParameter(
             "SHOW_FEEDBACK_SCREEN",
-            showFeedbackScreenCheckbox.isChecked.toString()
+            binding.showFeedbackScreenCheckbox.isChecked.toString()
         )
 
-        if (!reprintAtkEditText.text.isNullOrEmpty()) {
-            uriBuilder.appendQueryParameter("ATK", reprintAtkEditText.text.toString())
+        if (!binding.reprintAtkEditText.text.isNullOrEmpty()) {
+            uriBuilder.appendQueryParameter("ATK", binding.reprintAtkEditText.text.toString())
         }
 
-        val customerType: String? = when (customerTypeSpinner.selectedItemPosition) {
+        val customerType: String? = when (binding.customerTypeSpinner.selectedItemPosition) {
             0 -> "MERCHANT"
             1 -> "CLIENT"
             else -> null

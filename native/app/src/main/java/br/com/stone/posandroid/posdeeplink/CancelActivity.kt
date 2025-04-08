@@ -2,25 +2,28 @@ package br.com.stone.posandroid.posdeeplink
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.EditText
-import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import br.com.stone.posandroid.posdeeplink.databinding.ActivityCancelBinding
 
 class CancelActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCancelBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cancel)
+        binding = ActivityCancelBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
-    fun btnCancel(view: View) {
+    fun btnCancel() {
         val deepLinkReturnScheme = "deeplinktest"
-        val amount = findViewById<EditText>(R.id.editAmount).text.toString()
-        val atk = findViewById<EditText>(R.id.editAtk).text.toString()
-        val isEditableAmount = findViewById<Switch>(R.id.isEditableAmount).isChecked
+        val amount = binding.editAmount.text.toString()
+        val atk = binding.editAtk.text.toString()
+        val isEditableAmount = binding.isEditableAmount.isChecked
 
         val uriBuilder = Uri.Builder()
         uriBuilder.authority("cancel")
