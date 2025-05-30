@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.stone.posandroid.posdeeplink.databinding.ActivityCancelBinding
@@ -17,11 +18,14 @@ class CancelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCancelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.button.setOnClickListener {
+            btnCancel()
+        }
     }
 
-    fun btnCancel() {
+    private fun btnCancel() {
         val deepLinkReturnScheme = "deeplinktest"
-        val amount = binding.editAmount.text.toString()
+        val amount= binding.editAmount.text.toString()
         val atk = binding.editAtk.text.toString()
         val isEditableAmount = binding.isEditableAmount.isChecked
 
