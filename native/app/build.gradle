@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-//apply plugin: 'kotlin-android-extensions'
-apply from: '../gertec/gertec-signing-config.gradle'
-
+apply from: rootProject.file("signatures/positivo/positivo-signing-config.gradle")
+apply from: rootProject.file("signatures/gertec/gertec-signing-config.gradle")
+apply from: rootProject.file("signatures/stone/stone-signing-config.gradle")
 
 android {
     compileSdk 35
@@ -36,6 +36,37 @@ android {
 
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    flavorDimensions = ["model"]
+
+    productFlavors {
+
+        sunmiLegacy { //Flavor para Sunmi P2A7, usando HAL 1.x
+            dimension "model"
+            signingConfig signingConfigs.stone
+            versionNameSuffix "-sunmiLegacy"
+
+        }
+
+        sunmiSeriesP { //Flavor os novos terminais Sunmi (P2A11), usando HAL 2.x
+            dimension "model"
+            signingConfig signingConfigs.stone
+            versionNameSuffix "-sunmiSeriesP"
+        }
+
+        ingenico {
+            dimension "model"
+            signingConfig signingConfigs.stone
+            versionNameSuffix "-ingenico"
+        }
+
+        tectoySeriesT {
+            dimension "model"
+            signingConfig signingConfigs.stone
+            versionNameSuffix "-tectoySeriesT"
+        }
+
     }
 
 }
